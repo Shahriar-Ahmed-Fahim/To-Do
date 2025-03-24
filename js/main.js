@@ -20,7 +20,7 @@ btn.addEventListener("click", function(){
 function display(){
     for(let i = 0; i < taskListArr.length; i++){
         let className = isNaN(taskListArr[i]) ? "type" : "counter";
-        taskList.innerHTML += `<li> <span class="${className}">${taskListArr[i]}</span> <button class="edit">Edit</button> <button class="delete">Delete</button></li>`
+        taskList.innerHTML += `<li> <span class="${className}">${taskListArr[i]}</span> <button class="edit">Edit</button> <button class="delete">Delete</button></li>`;
         let editBtn = document.querySelectorAll(".edit");
         let editBtnArr = Array.from(editBtn);
         let deleteBtn = document.querySelectorAll(".delete");
@@ -86,17 +86,30 @@ function applyCounter(item){
 function applyType(item){
     let typeText = item.innerHTML;
     let textArr = typeText.split("");
-    textArr = textArr.map((item, index) => `<span style="color:${color[index%3]}">${item}</span>`);
-    console.log(textArr);
+    // textArr = textArr.map((item, index) => `<span style="color:${color[index%color.length]}">${item}</span>`);
+
+    let temp = 0;
+
+    textArr = textArr.map((item) => {
+        let temp2 = `<span style="color:${color[temp%color.length]}">${item}</span>`;
+        (item != " ")? temp++ : temp = 0;
+        return temp2;
+    })
+
     item.innerHTML = "";
     let typeCountStart = 0;
 
+    let flag = 0;
+
     function typeJs(){
         if(typeCountStart < textArr.length){
-            item.innerHTML += `<span style="color:${color[typeCountStart%3]}">${typeText[typeCountStart]}<span>`;
+            item.innerHTML += `<span style="color:${color[flag%color.length]}">${typeText[typeCountStart]}<span>`;
+            (typeText[typeCountStart] != " ")? flag++ : flag = 0; // testing
+
+            // item.innerHTML += `<span style="color:${color[typeCountStart%3]}">${typeText[typeCountStart]}<span>`;
             typeCountStart++;
-            
         }else{
+            flag = 0; // testing
             textArr.pop();
             item.innerHTML = textArr.join("");
             if(textArr.length == 0){
