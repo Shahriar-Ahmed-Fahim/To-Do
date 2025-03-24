@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .type{
+            display: inline-block;
+            position: relative;
+        }
+        .type::after{
+            content: '';
+            width: 2px;
+            height: 100%;
+            background: #000;
+            position: absolute;
+            top: 0;
+            right: 0;
+        }
+    </style>
+</head>
+<body>
+    
+    <!-- <span class="counter">53</span>
+    <span class="counter">15</span>
+    <span class="counter">24</span> -->
+
+    <h1 class="type">Shahriar Ahmed</h1> <br>
+    <!-- <h1 class="type">My name is Shahriar Ahmed</h1> <br>
+    <h1 class="type">Shahriar Ahmed</h1> -->
+
+    <script>
+        // let counter = document.querySelectorAll(".counter");
+        // let counterArr = Array.from(counter);
+
+        // counterArr.map((item)=>{
+        //     let counterNum = item.innerHTML;
+        //     item.innerHTML = "";
+        //     let counterStart = 0;
+
+        //     function count(){
+        //         counterStart++;
+        //         item.innerHTML = counterStart;
+        //         if(counterNum == counterStart){
+        //             clearInterval(counterInterval);
+        //         }
+        //     }
+
+        //     let counterInterval = setInterval(()=>{
+        //         count();
+        //     }, 300)
+        // })
+
+        let type = document.querySelectorAll('.type');
+        let typeArr = Array.from(type);
+
+        typeArr.map((item)=>{
+            let typeText = item.innerHTML;
+            let textArr = typeText.split("");
+            item.innerHTML = "";
+            let typeCountStart = 0;
+
+            function typeJs(){
+                if(typeCountStart < textArr.length){
+                    item.innerHTML += typeText[typeCountStart];
+                    typeCountStart++;
+                    
+                }else{
+                    textArr.pop();
+                    item.innerHTML = textArr.join("");
+                    if(textArr.length == 0){
+                        typeCountStart = 0;
+                        textArr = typeText.split("");
+                    }
+                }
+            }
+            
+            // function typeJs(){
+            //     item.innerHTML += typeText[typeCountStart];
+            //     if(typeText.length < typeCountStart){
+            //         clearInterval(typeInterval);
+            //         item.innerHTML = "";
+            //         typeCountStart = 0;
+            //         console.log("sadfa")
+            //         typeCountStart--;
+            //     }else{
+            //         typeCountStart++;
+            //     }
+
+            // }
+
+            let typeInterval = setInterval(()=>{
+                typeJs();
+            }, 300)
+        })
+
+    </script>
+</body>
+</html>
